@@ -10,15 +10,13 @@ $users = User::objects()
 
 if ($_REQUEST['query']) {
     $search = $_REQUEST['query'];
-    $filter = Q::any(array(
+    $users->filter(Q::any(array(
         'emails__address__contains' => $search,
         'name__contains' => $search,
         'org__name__contains' => $search,
-    ));
-    if (UserForm::getInstance()->getField('phone'))
-        $filter->add(array('cdata__phone__contains' => $search));
-
-    $users->filter($filter);
+        'cdata__phone__contains' => $search,
+        // TODO: Add search for cdata
+    )));
     $qs += array('query' => $_REQUEST['query']);
 }
 

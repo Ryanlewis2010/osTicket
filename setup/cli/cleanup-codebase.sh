@@ -51,6 +51,7 @@ images/logout.gif
 images/my_tickets.gif
 images/new_ticket.gif
 images/new_ticket_icon.jpg
+images/poweredby.jpg
 images/rainbow.png
 images/refresh_btn.gif
 images/ticket_status.gif

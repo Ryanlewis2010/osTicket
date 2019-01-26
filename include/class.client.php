@@ -59,19 +59,32 @@ implements EmailContact, ITicketUser, TemplateVariable {
         case 'ticket_link':
             $qstr = array();
             if ($cfg && $cfg->isAuthTokenEnabled()
-                    && ($ticket=$this->getTicket()))
-                $qstr['auth'] = $ticket->getAuthToken($this);
+                    && ($ticket=$this->getTicket())
+                    && !$ticket->getThread()->getNumCollaborators()) {
+                      $qstr['auth'] = $ticket->getAuthToken($this);
+                      return sprintf('%s/view.php?%s',
+                              $cfg->getBaseUrl(),
+                              Http::build_query($qstr, false)
+                              );
+                    }
+                    else {
+                      return sprintf('%s/tickets.php?id=%s',
+                              $cfg->getBaseUrl(),
+                              $ticket->getId()
+                              );
+                    }
 
-            return sprintf('%s/view.php?%s',
-                    $cfg->getBaseUrl(),
-                    Http::build_query($qstr, false)
-                    );
+
+
             break;
         }
     }
 
     function getId() { return ($this->user) ? $this->user->getId() : null; }
     function getEmail() { return ($this->user) ? $this->user->getEmail() : null; }
+    function getName() {
+        return ($this->user) ? $this->user->getName() : null;
+    }
 
     static function lookupByToken($token) {
 
@@ -148,6 +161,11 @@ class TicketOwner extends  TicketUser {
         $this->ticket = $ticket;
     }
 
+    function __toString() {
+        return (string) $this->getName();
+    }
+
+
     function getTicket() {
         return $this->ticket;
     }
@@ -162,7 +180,7 @@ class TicketOwner extends  TicketUser {
  *
  */
 
-class  EndUser extends BaseAuthenticatedUser {
+class EndUser extends BaseAuthenticatedUser {
 
     protected $user;
     protected $_account = false;
@@ -396,7 +414,7 @@ class ClientAccount extends UserAccount {
         global $cfg;
 
         // FIXME: Updates by agents should go through UserAccount::update()
-        global $thisstaff, $thisclient;
+        global $thisstaff;
         if ($thisstaff)
             return parent::update($vars, $errors);
 
@@ -454,20 +472,12 @@ class ClientAccount extends UserAccount {
             Signal::send('auth.pwchange', $this->getUser(), $info);
             $this->cancelResetTokens();
             $this->clearStatus(UserAccountStatus::REQUIRE_PASSWD_RESET);
-            // Clean sessions
-            Signal::send('auth.clean', $this->getUser(), $thisclient);
         }
 
         return $this->save();
     }
 }
 
-// Used by the email system
-interface EmailContact {
-    // function getId()
-    // function getName()
-    // function getEmail()
-}
 
 interface ITicketUser {
 /* PHP 5.3 < 5.3.8 will crash with some abstract inheritance issue

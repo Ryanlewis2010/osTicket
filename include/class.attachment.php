@@ -108,23 +108,15 @@ extends InstrumentedList {
      */
     function keepOnlyFileIds($ids, $inline=false, $lang=false) {
         if (!$ids) $ids = array();
-        $new = array_flip($ids);
+        $new = array_fill_keys($ids, 1);
         foreach ($this as $A) {
             if (!isset($new[$A->file_id]) && $A->lang == $lang && $A->inline == $inline)
                 // Not in the $ids list, delete
                 $this->remove($A);
             unset($new[$A->file_id]);
         }
-        $attachments = array();
-        // Format $new for upload() with new name
-        foreach ($new as $id=>$name) {
-            $attachments[] = array(
-                    'id' => $id,
-                    'name' => $name
-                );
-        }
-        // Everything remaining in $attachments is truly new
-        $this->upload($attachments, $inline, $lang);
+        // Everything remaining in $new is truly new
+        $this->upload(array_keys($new), $inline, $lang);
     }
 
     function upload($files, $inline=false, $lang=false) {
