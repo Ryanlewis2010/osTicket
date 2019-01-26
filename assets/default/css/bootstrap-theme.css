@@ -130,44 +130,6 @@ code {
   text-align: right;
 }
 
-.footer .poweredBy {
-font-size: 0.8em;
-  color: #cccccc;
-  padding-top: 5px;
-  padding-right: 15px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  text-align: center;
-  box-shadow: 0px 0px 3px white inset, 0px 0px 2px black, 0px 0px 4px black inset;
-  text-shadow: 0px 0px 2px black;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
-
-	}
-.footer .poweredBy .osticket-logo
-{
-  height: auto;
-  width: 55px;
-  vertical-align: baseline;
-  border-top-width: medium;
-  border-right-width: medium;
-  border-bottom-width: medium;
-  border-left-width: medium;
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: none;
-  border-image-source: none;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-width: 1 1 1 1;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  filter: drop-shadow(0px 0px 4px black);
-}
-
 
 #content {
 

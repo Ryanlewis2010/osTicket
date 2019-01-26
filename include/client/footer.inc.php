@@ -12,7 +12,7 @@
 	<div class="footer"> 
 				<div class="company">
 					Copyright &copy; <?php echo date('Y'); ?> <?php echo (string) $ost->company ?: 'o2bkids.com'; ?> - All rights reserved.
-						<?php echo __('Helpdesk software - powered by osTicket'); ?></a>-->
+						</a>-->
 				</div>
 	</div>
 	
