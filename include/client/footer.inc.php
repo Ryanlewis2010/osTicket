@@ -1,9 +1,24 @@
-        </div>
-    </div>
-    <div id="footer">
-        <p>Copyright &copy; <?php echo date('Y'); ?> <?php echo (string) $ost->company ?: 'osTicket.com'; ?> - All rights reserved.</p>
-        <a id="poweredBy" href="http://osticket.com" target="_blank"><?php echo __('Helpdesk software - powered by osTicket'); ?></a>
-    </div>
+	<!--Begin of footer-->
+ <div class="push"></div>
+		</div><!--row-->
+
+	 <!--container-->
+</div>
+</div>
+	</div>
+	
+
+	
+	<div class="footer"> 
+				<div class="company">
+					Copyright &copy; <?php echo date('Y'); ?> <?php echo (string) $ost->company ?: 'o2bkids.com'; ?> - All rights reserved.
+						</a>-->
+				</div>
+	</div>
+	
+	
+						
+	
 <div id="overlay"></div>
 <div id="loading">
     <h4><?php echo __('Please Wait!');?></h4>
@@ -21,5 +36,12 @@ if (($lang = Internationalization::getCurrentLanguage()) && $lang != 'en_US') { 
         print $api->client(false);
     ?>);
 </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+
 </body>
 </html>
